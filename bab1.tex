@@ -1,4 +1,7 @@
 \chapter{Instalasi Python}
+
+\section{Interpreter Python}
+\label{sec:interpreter}
 Seperti telah dijelaskan di bagian Pengantar, instalasi \textit{interpreter} Python dilakukan di sistem operasi Windows 7. Tahapan instalasi ini mengasumsikan bahwa tidak ada kendala apapun terkait sistem operasi. Selanjutnya mahasiwa diminta untuk mengunduh \textit{interpreter} Python melalui laman \url{https://www.python.org/downloads/} sesuai kebutuhannya. 
 
 Mengeksekusi unduhan tersebut akan memunculkan dialog seperti pada \figurename~\ref{fig:install1}. Pastikan untuk memilih konfigurasi \texttt{PATH} secara otomatis agar ketika proses instalasi selesai, \textit{interpreter} Python dapat dijalankan dari mana saja di sistem komputer masing-masing. Untuk kondisi di mana terjadi kesalahan, akan muncul dialog yang memberi kita kesempatan untuk melihat \textit{log}. Buka log tersebut dan lihat sumber dari kesalahan instalasi yang sedang terjadi.
@@ -127,4 +130,115 @@ Menu aplikasi pendukung Python akan muncul seperti \figurename~\ref{fig:menu}. M
   \end{center}
 \end{figure}
 
-Selanjutnya, jika ditemukan petunjuk untuk masuk ke Python \texttt{shell}, Anda dapat menggunakan aplikasi \texttt{IDLE}\texttt{}, atau menggunakan terminal (di Linux)/\texttt{CMD} (di Windows) dengan terlebih dahulu menjalankan perintah \texttt{python}.
+Selanjutnya, jika ditemukan petunjuk untuk masuk ke Python \texttt{Shell}, Anda dapat menggunakan aplikasi \texttt{IDLE}\texttt{}, atau menggunakan terminal (di Linux)/\texttt{CMD} (di Windows) dengan terlebih dahulu menjalankan perintah \texttt{python}.
+
+\section{Anaconda}
+Selain pilihan manual seperti yang telah dijelaskan di Sub bab \ref{sec:interpreter}, Anaconda bisa menjadi opsi lain yang lebih bersifat otomatis. Saya menyebutnya otomatis karena Anaconda sejumlah pustaka Python, terutama yang banyak digunakan di \textit{Data Mining}, \textit{Machine Learning} atau \textit{Data Science} telah dikemas di dalam Anaconda. Bahkan beberapa editor yang populer untuk Python juga dikemasnya. Anaconda bahkan mengemasnya khusus untuk \textit{platform} yang berbeda. Anda dapat menghubungi alamat \url{https://www.anaconda.com/} untuk mengunduh aplikasinya. Sesuaikan kebutuhan Anda dengan pilihan yang ada seperti ditunjukkan \figurename~\ref{fig:platformAnaconda}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaInstall0.png}
+    \caption{Pilihan \textit{platform} instalasi Anaconda}
+    \label{fig:platformAnaconda}
+  \end{center}
+\end{figure}
+
+Instalasi Anaconda akan menghadirkan dialog seperti ditunjukkan \figurename~\ref{fig:pembuka} - \figurename~\ref{fig:instalasiEnd}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaInstall1.png}
+    \caption{Dialog pembuka instalasi}
+    \label{fig:pembuka}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaInstall2.png}
+    \caption{Menyetujui kesepakatan}
+    \label{fig:kesepakatan}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaInstall3.png}
+    \caption{Pilihan pengguna Anaconda}
+    \label{fig:pengguna}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaInstall4.png}
+    \caption{Target instalasi}
+    \label{fig:target}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaInstall5.png}
+    \caption{Menjadikan Anaconda sebagai sistem utama Python}
+    \label{fig:utama}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaInstall6.png}
+    \caption{Proses instalasi}
+    \label{fig:prosesInstalasi}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaInstall9.png}
+    \caption{Instalasi selesai}
+    \label{fig:instalasiEnd}
+  \end{center}
+\end{figure}
+
+Instalasi Anaconda akan membuat menu seperti pada \figurename~\ref{fig:menuAnaconda}. Di situ terlihat sejumlah aplikasi yang dapat digunakan untuk mengembangkan kode komputer berbasis Python seperti Jupyter dan Spyder. Untuk Jupyter, aplikasi ini akan menghadirkan antarmuka seperti tampak pada \figurename~\ref{fig:jupyter}. Di sisi kanan atas terlihat beberapa opsi antarmuka untuk mengelola proyek Python dengan Jupyter, seperti Terminal \figurename~\ref{fig:jupyterTerminal} atau Python \texttt{Shell} di bawah Jupyter seperti \figurename~\ref{fig:jupyterShell} yang perannya seperti \texttt{IDLE} di \figurename~\ref{fig:idle}. Sedangkan untuk Spyder, akan tampak antarmuka seperti \figurename~\ref{fig:spyder}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/anacondaMenu2.png}
+    \caption{}
+    \label{fig:menuAnaconda}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/jupyter2.png}
+    \caption{Aplikasi \texttt{Jupyter}}
+    \label{fig:jupyter}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/jupyter3.png}
+    \caption{Terminal pada aplikasi \texttt{Jupyter}}
+    \label{fig:jupyterTerminal}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.5]{pics/jupyter4.png}
+    \caption{Python \texttt{Shell} pada aplikasi \texttt{Jupyter}}
+    \label{fig:jupyterShell}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=.45]{pics/spyder.png}
+    \caption{Aplikasi \texttt{Spyder}}
+    \label{fig:spyder}
+  \end{center}
+\end{figure}
