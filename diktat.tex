@@ -34,6 +34,7 @@
 \usepackage{listings}
 \usepackage[nodayofweek,level]{datetime}
 \usepackage[bahasai]{babel}
+\usepackage{subfigure}
 \selectlanguage{bahasai}
 \renewcommand{\bibname}{Daftar Referensi}
 \renewcommand{\contentsname}{Daftar Isi}
@@ -41,7 +42,6 @@
 \renewcommand{\listtablename}{Daftar Tabel}
 \renewcommand\lstlistingname{Program}
 \renewcommand\lstlistlistingname{Daftar Program}
-%\def\lstlistingautorefname{Program.}
 \renewcommand{\chaptername}{BAB}
 \renewcommand{\figurename}{\bo{Gambar}}
 \renewcommand{\tablename}{\bo{Tabel}}
@@ -96,7 +96,7 @@ STMIK Eresha - 2020
 \include{pengantar}
 
 \pagenumbering{arabic}
-\chapter{Sejarah Pemrograman Python}
+%\chapter{Sejarah Pemrograman Python}
 
 \include{bab1}
 
@@ -104,7 +104,9 @@ STMIK Eresha - 2020
 
 \include{bab3}
 
-\chapter{Sub Modul Pustaka \texttt{Scikit-Image}}
+\include{bab4}
+
+%\chapter{Sub Modul Pustaka \texttt{Scikit-Image}}
 
 \bibliographystyle{apalike}
 \bibliography{reference}
