@@ -82,3 +82,5 @@ Pada kondisi tertentu, misalnya seperti ditunjukkan \lstlistingname~\ref{lst:301
 \scriptsize
 \lstinputlisting[language=xml, numbers=left, numberstyle=\tiny, caption=Contoh citra tanpa informasi jenis, showstringspaces=false, label=lst:301518]{script/301518.xml}
 \normalsize
+
+Operasi pencarian semua berkas pada \textit{directory} tertentu juga bermanfaat ketika diperlukan operasi pengolahan citra seperti \texttt{resize} atau \texttt{rescale}. Fitur \textit{Histogram of Oriented Gradients} seperti akan dijelaskan pada sub bab \ref{sec:hog} sangat dipengaruhi oleh ukuran citra. Sehingga citra yang akan dianalisis harus dalam ukuran yang sama untuk mengetahui aspek pembedanya, yaitu obyek yang terdapat di dalam citra. Tentu tidak efisien jika operasi \texttt{resize} atau \texttt{rescale} harus dilakukan secara manual.
