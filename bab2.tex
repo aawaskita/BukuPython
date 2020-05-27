@@ -49,3 +49,36 @@ Format dokumentasi seperti yang ditunjukkan pada \figurename~\ref{fig:doc} sulit
     \label{fig:doc2}
   \end{center}
 \end{figure}
+
+\section{Operasi Berkas}
+
+Yang dimaksud sebagai operasi berkas di sub bab ini ditujukan untuk memberikan solusi otomatis melakukan operasi pengolahan citra pada sejumlah besar citra (khususny), atau berkas digital secara umum. Sebagai ilustrasi, dataset citra terkait tumbuhan salah satunya dapat diperoleh di PlantCLEF2017 \footnote{\url{http://otmedia.lirmm.fr/LifeCLEF/PlantCLEF2017/TrainPackages/PlantCLEF2017Train1EOL.tar.gz}}.
+
+Ketika berkas tersebut diekstrak, kita akan memperoleh \texttt{directory} data sebagai \texttt{directory} teratas dari dataset. Di dalamnya ada cukup banyak \texttt{directory} yang diberi nama berupa deretan angka. Di dalam \texttt{directory} tersebut, akan ada pasangan berkas dengan nama sama dari jenis \texttt{xml} dan \texttt{jpg}. Isi dari berkas berekstensi \texttt{xml} ditunjukkan oleh \lstlistingname~\ref{lst:135788}. Berkas ini berada dalam \texttt{directory} \texttt{9982}.
+
+\scriptsize
+\lstinputlisting[language=xml, numbers=left, numberstyle=\tiny, caption=135788.xml, showstringspaces=false, label=lst:135788]{script/135788.xml}
+\normalsize
+
+Yang perlu diperhatikan dari \texttt{element} berkas \texttt{xml} di \lstlistingname~\ref{lst:135788} adalah sebagai berikut.
+\begin{itemize}
+  \item \texttt{FileName}: elemen ini berisi informasi nama berkas
+  \item \texttt{Content}: elemen ini berisi informasi jenis citra. \lstlistingname~\ref{lst:135788} menunjukkan bahwa citra yang sedang diamati adalah bunga.
+  \item \texttt{Family}, \texttt{Genus}, \texttt{Species}: masing-masing menunjukkan tingkatan taksonomi dari tumbuhan. Dalam konteks klasifikasi tanaman, umumnya informasi spesies yang diperlukan. Tetapi, karena berkas pada dataset tidak tersusun dalam taksonomi, maka informasi yang disimpan pada elemen tersebut bermanfaat ketika kita ingin menyusun ulang struktur berkas citra berdasarkan taksonominya.
+\end{itemize}
+
+Operasi berkas yang dicontohkan dalam diktat ini adalah menyusun ulang citra berdasarkan jenis citra, apakah itu bunga atau daun. Kemudian di dalam \textit{directory} jenis citra tersebut, citra akan disusun mengikuti hirarki taksonominya. Sehingga akan ada struktur \textit{directory} seperti \texttt{Flower/Compositae/Carthamus/Carthamus\ caeruleus\ L.}. Pada kasus ini, berkas-berkas di dalamnya merupakan bunga dari \texttt{Family Compositae}, \texttt{Genus Carthamus} dan \texttt{Species Carthamus\ caeruleus\ L.}. Programnya disajikan pada \lstlistingname~\ref{lst:pynonxmlreader}. Di dalamnya ada sejumlah operasi berkas seperti pencarian dalam \textit{directory} tertentu, pencarian berkas dengan ekstensi tertentu sampai membuat \textit{directory} dan menduplikasi berkas dari satu \textit{directory} ke \textit{directory} lain.
+
+\scriptsize
+\lstinputlisting[language=python, numbers=left, numberstyle=\tiny, caption=Menysun ulang struktur berkas, showstringspaces=false, label=lst:pynonxmlreader]{script/pynonxmlreader.py}
+\normalsize
+
+Di \lstlistingname~\ref{lst:pynonxmlreader} disediakan juga pendeteksi kesalahan \texttt{try-except} ketika operasi berkas dilakukan. Hal ini dimaksudkan agar jalannya program tidak terhenti ketika kesalahan terjadi. Pengguna cukup mengetahui dari pesan kesalahan yang didefinisikan.
+
+Jika fokus penelitian kita hanya pada bunga, maka kita hanya akan melakukan pengolahan pada citra yang berisi obyek bunga. Demikian juga untuk \texttt{Family}, \texttt{Genus} maupun \texttt{Species} tertentu.
+
+Pada kondisi tertentu, misalnya seperti ditunjukkan \lstlistingname~\ref{lst:301518}, tidak ada informasi jenis citra. Hal ini terlihat dari tidak adanya isi elemen \texttt{Content}. Untuk citra yang salah satu atau seluruh elemennya tidak bernilai, \lstlistingname~\ref{lst:pynonxmlreader} akan mengelompokkannya sebagai \texttt{Undefined}. Untuk citra yang dideskripsikan oleh berkas \texttt{xml} seperti \lstlistingname~\ref{lst:301518} akan disimpan dalam \textit{directory} \texttt{Undefined/Pinaceae/Pinus/Pinus\ pinea\ L.}.
+
+\scriptsize
+\lstinputlisting[language=xml, numbers=left, numberstyle=\tiny, caption=Contoh citra tanpa informasi jenis, showstringspaces=false, label=lst:301518]{script/301518.xml}
+\normalsize
