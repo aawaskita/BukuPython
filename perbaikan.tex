@@ -57,3 +57,23 @@ g(x,y)=\left(f(x,y)*h(x,y)\right)+n(x,y)
 \label{fig:addNoise}
 \end{center}
 \end{figure}
+
+\section{\textit{Spatial denoizing}}
+Pustaka \textit{scikit-image} menyediakan fungsi pengurangan \textit{noise} secara spasial pada sub modul \texttt{skimage.filters.rank}. Sub bab ini akan menunjukkan hasil dari pengurangan \textit{noise} secara spasial berbasis sejumlah opsi \textit{structuring element} (dibahas di bab \ref{sec:morph}). 
+
+\lstlistingname~\ref{lst:denoise} menjelaskan proses pengurangan \textit{noise} dengan filter \texttt{mean} dan \textit{structuring element} berupa matriks segiempat dengan nilai elemen penyusunnya yang membentuk segiempat (\texttt{square}) dan lingkaran (\texttt{disk}). Sedangkan \figurename~\ref{fig:deNoise} menunjukkan perbedaan hasil pengurangan \textit{noise} terhadap \figurename~\ref{fig:nois}.
+
+\scriptsize
+\lstinputlisting[language=python, numbers=left, numberstyle=\tiny, caption=Pengurangan \textit{noise} dengan filter spasial, showstringspaces=false, label=lst:denoise]{script/denoise.py}
+\normalsize
+
+\begin{figure}[h!]
+\begin{center}
+\subfigure[]{\label{fig:sq3}\includegraphics[scale=.35]{pics/baboonSquare3.png}}
+\subfigure[]{\label{fig:sq5}\includegraphics[scale=.35]{pics/baboonSquare5.png}}
+\subfigure[]{\label{fig:disk1}\includegraphics[scale=.35]{pics/baboonDisk1.png}}
+\subfigure[]{\label{fig:disk2}\includegraphics[scale=.35]{pics/baboonDisk2.png}}
+\caption{Hasil pengurangan \textit{noise} dengan \textit{structuring element} (a). \texttt{square(3)}, (b). \texttt{square(5)}, (c). \texttt{disk(1)} dan (d). \texttt{disk(2)}}
+\label{fig:deNoise}
+\end{center}
+\end{figure}
