@@ -46,3 +46,14 @@ g(x,y)=\left(f(x,y)*h(x,y)\right)+n(x,y)
    \item \texttt{amount} adalah argumen yang digunakan untuk menentukan proporsi jumlah piksel yang akan dikonversi nilai internsitasnya ketika \texttt{mode} 'salt', 'pepper' dan 's\&p' digunakan.
    \item \texttt{salt\_vs\_pepper} adalah argumen yang digunakan untuk menentukan proporsi jumlah piksel yang nilai intensitasnya akan dikonversi menjadi \texttt{1} ('salt') dan \texttt{0}/\texttt{-1} ('pepper'). Argumen ini diberikan ketika \texttt{mode} bernilai 's\&p'
  \end{enumerate}
+ 
+\figurename~\ref{fig:addNoise} menunjukkan perbandingan citra asli dan citra dengan penambahan \textit{noise} dari fungsi Gaussian.
+ 
+\begin{figure}[h!]
+\begin{center}
+\subfigure[]{\label{fig:asli}\includegraphics[scale=.35]{pics/baboonGS.png}}
+\subfigure[]{\label{fig:nois}\includegraphics[scale=.35]{pics/baboonNoise.png}}
+\caption{Perbandingan (a). citra asli, (b). citra dengan penambahan \textit{noise} Gaussian dengan nilai \texttt{mean=0} dan \texttt{var=0.01}}
+\label{fig:addNoise}
+\end{center}
+\end{figure}
