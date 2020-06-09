@@ -77,3 +77,53 @@ Pustaka \textit{scikit-image} menyediakan fungsi pengurangan \textit{noise} seca
 \label{fig:deNoise}
 \end{center}
 \end{figure}
+
+\section{\textit{Frequency domain denoizing}}
+Setiap fungsi yang berulang secara periodik dapat dinyatakan sebagai jumlah dari beberapa fungsi pada frekuensi dan amplitudo tertentu \cite{Gonzalez}. Ilustrasinya disajikan pada \figurename~\ref{fig:periodik}. Sebuah citra digital dapat dianggap sebagai fungsi periodik yang karenanya dapat ditransformasi ke dalam domain frekuensi. Pada posisi di mana terjadi perubahan nilai intensitas piksel secara signifikan, citra dikatakan menyimpan komponen frekuensi tinggi. Sebaliknya, pada posisi di mana perubahan intensitas piksel sangat landai bahkan nyaris tetap, citra dikatakan menyimpan komponen frekuensi rendah.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=.5]{pics/fourierBasic.png}
+    \caption{Fungsi periodik yang merupakan kombinasi dari beberapa fungsi periodik lain}
+    \label{fig:periodik}
+  \end{center}
+\end{figure}
+
+Pada frekuensi tinggi, di situlah batas obyek umumnya berada. Mempertahankan komponen frekuensi tinggi akan menjaga kontras citra tetap baik. Sebaliknya, frekuensi rendah merepresentasikan kondisi di mana nilai intensitas piksel cenderung tetap. Mempertahankan komponen frekuensi rendah menjadi dasar dari proses penghalusan (\textit{smooting}) citra.
+
+Secara teori, mempertahankan/menghilangkan komponen dengan frekuensi/rentang frekuensi tertentu dari citra dilakukan pada domain frekuensi. Citra harus ditransformasi dahulu ke domain frekuensi. Selanjutnya, komponen frekuensi yang tidak diharapkan dapat dihilangkan. Terakhir, transformasi dilakukan kembali ke domain spasial. Dengan pustaka \texttt{scikit-image}, proses transformasi dilakukan secara implisit oleh fungsi \texttt{difference\_of\_gaussian} di bawah sub modul \texttt{filters}. Fungsi tersebut sejatinya adalah sebuah \textit{band pass filter}, filter untuk menyaring rentang frekuensi tertentu. Frekuensi dinyatakan sebagai nilai $\sigma$ (standar deviasi). Ilustrasinya disajikan pada \figurename~\ref{fig:gaussian}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=.6]{pics/gaussian.png}
+    \caption{Ilustrasi kurva dengan fungsi gaussian}
+    \label{fig:gaussian}
+  \end{center}
+\end{figure}
+
+Semakin besar nilai $\sigma$ maka frekuensi semakin kecil. Sebaliknya, semakin kecil nilai $\sigma$, maka frekuensi semakain besar. Ilustrasinya disajikan pada \figurename~\ref{fig:sigmaFrekuensi}. Nilai $\sigma$ di \figurename~\ref{fig:cth1} lebih besar dibandingkan di \figurename~\ref{fig:cth2}. Besarnya nilai $\sigma$ ditunjukkan dengan bentuk kurva yang melebar dan dengan amplitudo kecil (\figurename~\ref{fig:cth1}). Sedangkan besarnya nilai frekuensi ditunjukkan dengan bentuk kurva yang pipih dengan amplitudo besar (\figurename~\ref{fig:cth2}).
+
+\begin{figure}
+\begin{center}
+\subfigure[]{\label{fig:cth1}\includegraphics[scale=.35]{pics/contoh1.png}}
+\subfigure[]{\label{fig:cth2}\includegraphics[scale=.35]{pics/contoh2.png}}
+\caption{Ilustrasi perbandingan nilai $\sigma$ terhadap frekuensi}
+\label{fig:sigmaFrekuensi}
+\end{center}
+\end{figure}
+
+Sedangkan \figurename~\ref{fig:filteringFreq} menunjukkan hasil penyaringan frekuensi rendah, sedang (pada rentang frekuensi tertentu), dan tinggi dari citra baboon dalam warna RGB. Penyaringan tersebut dilakukan dengan fungsi \texttt{difference\_of\_gaussian}. \figurename~\ref{fig:highPass} diperoleh dengan memberikan argumen \texttt{low\_sigma=0} dan \texttt{high\_sigma=5}. Pemberian argumen dengan nilai tersebut bermakna frekuensi tertinggi yang ada di dalam citra hingga frekuensi yang setara dengan nilai $\sigma=5$ akan dipertahankan. Terlihat bahwa \figurename~\ref{fig:highPass} terlihat lebih jelas daripada kedua citra lainnya.
+
+Selanjutnya, pembentukan citra pada \figurename~\ref{fig:bandPass}, argumen yang diberikan untuk \texttt{low\_sigma=5} dan \texttt{high\_sigma=10}. Pemberian argumen tersebut akan menyaring frekuensi yang setara dengan nilai $\sigma=10$ hingga frekuensi yang setara dengan nilai $\sigma=5$ akan dipertahankan. Karena frekuensi yang setara dengan nilai $\sigma=5$ atau lebih dihilangkan, maka citra di \figurename~\ref{fig:bandPass} terlihat semakin buram jika dibandingkan dengan citra pada \figurename~\ref{fig:highPass}.
+
+Terakhir, pembentukan citra pada \figurename~\ref{fig:LowPass}, argumen yang diberikan untuk \texttt{low\_sigma=10} sedangkan argumen \texttt{high\_sigma} tidak diberikan. Dengan kombinasi tersebut, frekuensi yang setara dengan nilai $\sigma=10$ dan yang lebih rendah akan dipertahankan. Berarti yang tersisa dari citra adalah komponen frekuensi rendah. Hasilnya, \figurename~\ref{fig:LowPass} tampak paling buram dibanding dua citra sebelumnya.
+
+\begin{figure}
+\begin{center}
+\subfigure[]{\label{fig:highPass}\includegraphics[scale=.25]{pics/baboonFiltered05.png}}
+\subfigure[]{\label{fig:bandPass}\includegraphics[scale=.25]{pics/baboonFiltered.png}}
+\subfigure[]{\label{fig:LowPass}\includegraphics[scale=.25]{pics/baboonFiltered10.png}}
+\caption{Hasil penyaringan frekuensi rendah, sedang dan tinggi pada citra RGB}
+\label{fig:filteringFreq}
+\end{center}
+\end{figure}
