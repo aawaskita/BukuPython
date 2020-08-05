@@ -1,6 +1,6 @@
 \chapter{Ekstraksi Fitur Bentuk}
 \section{Pendahuluan}
-
+\label{sec:citrabiner}
 Fitur bentuk citra diperoleh dengan terlebih dahulu membentuk citra biner, citra yang hanya memiliki dua nilai intensitas piksel, masing-masing \texttt{0} yang mewakili warna hitam dan \texttt{255} yang mewakili warna putih. \textit{Object of interest} akan diberi warna putih, sementara \textit{background} akan diberi warna hitam. Pembentukan citra biner memerlukan proses \textit{thresholding}, proses untuk menentukan titik batas yang dari titik itulah piksel dengan intensitas tertentu diubah menjadi \texttt{0}, sedangkan piksel lain nilai intensitasnya diubah menjadi \texttt{1}. Proses \textit{thresholding} ini mensyaratkan masukan berupa citra dalam skala keabuan.
 
 Pada pustaka \texttt{scikit-image}, proses \textit{thresholding} tersedia melalui beberapa fungsi yang didefinisikan di sub modul \texttt{skimage.filters}. Pustaka \texttt{scikit-image} bahkan menyediakan sebuah fungsi yang dapat digunakan untuk melakukan komparasi visual terhadap hasil \textit{thresholding} menggunakan berbagai metode yang disediakan secara terpisah.
@@ -57,7 +57,20 @@ Pendekatan ini dapat dilakukan dengan menyisipkan perintah \texttt{img=a[:,:,0]}
    \end{center}
  \end{figure}
  
+ \section{Jumlah obyek pada citra}
+Untuk mendapatkan fitur bentuk, obyek harus dapat terpisah secara utuh dari latar (\textit{background}). Pemisahan obyek dari latar ditunjukkan oleh citra biner yang sebelumnya dipelajari di sub bab \ref{sec:citrabiner}. Citra biner sendiri dapat dengan mudah diperoleh ketika obyek dan latar sangat berbeda seperti pada kasus di sub bab \ref{sec:regionprops}. Tetapi, ketika citra yang dihadapi memiliki obyek dan latar yang rumit (\figurename~\ref{fig:tulips}), pembentukan citra biner sangat sulit dilakukan. Untuk alasan inilah, banyak penelitian yang dilakukan terkait segmentasi obyek pada citra \cite{WANG20181}.
+ 
+Salah satu kriteria segmentasi obyek yang baik adalah ditemukannya jumlah obyek yang sama \cite{CREVIER2008143}. Mendeteksi keberadaan obyek secara otomatis dilakukan dengan fungsi blob, yang dalam pustaka \texttt{scikit-image} diterapkan sebagai fungsi \texttt{blob\_dog}, \texttt{blob\_doh} dan \texttt{blob\_log} di bawah sub modul \texttt{skimage.feature}. Basis identifikasi yang digunakan ketiga fungsi tersebut adalah pola hubungan intensitas piksel di mana sebuah obyek didefinisikan sebagai daerah dengan intensitas tinggi yang dikelilingi daerah dengan intensitas rendah atau sebaliknya. 
+
+Untuk mengidentifikasi kondisi tersebut, ketiga fungsi membutuhkan sejumlah argumen yang hampir sama. Dan argumen yang paling penting adalah \texttt{min\_sigma} dan \texttt{max\_sigma}. Seperti telah dijelaskan di sub bab \ref{sec:freqDenoizing}, perubahan intensitas citra dapat dinyatakan dalam bentuk frekuensi. Frekuensi tinggi merupakan representasi dari perubahan intensitas citra yang signifikan, sedangkan frekuensi rendah merupakan representasi dari intensitas citra yang cenderung stabil (tetap). Di sisi lain, frekuensi berbanding terbalik dengan $\sigma$. Semakin besar frekuensi, semakin kecil $\sigma$. Demikian sebaliknya. Argumen \texttt{min\_sigma} dan \texttt{max\_sigma} digunakan untuk mendeteksi daerah pada citra yang memiliki rentang frekuensi tersebut karena di situlah diduga terdapat batas obyek, daerah yang sebelumnya memiliki perubahan intensitas yang cepat kemudian melambat dan stabil. 
+
+Berikut contoh penggunaan ketiga fungsi tersebut.
+
+\subsection{\textit{Difference of Gaussian}}
+ 
+ 
  \section{Fitur bentuk}
+ \label{sec:regionprops}
 Berikut adalah fitur bentuk yang dapat diperoleh menggunakan pustaka \texttt{scikit-image}, yang dalam hal ini didefinisikan sebagai fungsi \texttt{regionprops} di dalam sub modul \texttt{measure}. Sebagai obyek kajian, \lstlistingname~\ref{lst:fiturFlavia} digunakan untuk mengambil sejumlah fitur bentuk dari fungsi \texttt{regionprops}, khususnya yang bernilai tunggal. Fitur titk pusat (\textit{centroid}) dari \textit{object of interest} juga akan diekstrak dengan memisahkannya menjadi titik pusat \texttt{X} dan \texttt{Y}. Citra yang akan diambil fitur bentuknya adalah citra daun flavia\footnote{\url{http://flavia.sourceforge.net/}}. Penggunaan citra tersebut disebabkan karena hanya ada obyek daun yang terdapat di setiap citra, sehingga tidak diperlukan lagi tahapan segmentasi. \lstlistingname~\ref{lst:fiturFlavia} juga akan membentuk berkas fitur dengan format \texttt{csv} yang siap dilatih dengan algoritma pelatihan tertentu. Fitur bentuk yang akan diekstrak adalah yang didefinisikan oleh Putzu \cite{PUTZU2014179}.
 
 \lstlistingname~\ref{lst:fiturFlavia} terdiri dari dua komponen utama, masing-masing komponen data \textit{lookup} untuk melihat kelas daun yang juga didefinisikan di laman \textit{repository} flavia. Data \textit{lookup} tersebut dijalankan oleh fungsi \texttt{leavesClass} di baris ke-7 yang menerima ID daun yang juga menjadi nama berkas daun yang bersangkutan. Sedangkan komponen berikutnya adalah ekstraksi fitur dan menuliskannya pada berkas fitur yang diberi nama \texttt{feature.csv}. 

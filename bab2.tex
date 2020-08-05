@@ -50,6 +50,105 @@ Format dokumentasi seperti yang ditunjukkan pada \figurename~\ref{fig:doc} sulit
   \end{center}
 \end{figure}
 
+\section{Struktur Data}
+%http://thomas-cokelaer.info/tutorials/python/data_structures.html
+Strukur data yang dimaksud di sini adalah data \textit{array}/larik dan sejenisnya, serta cara penggunaannya. Tidak jarang, fungsi dalam pustaka \textit{scikit-image} menerima argumen atau mengembalikan nilai dalam bentuk data \textit{array} atau sejenisnya. 
+\subsection{\texttt{List}}
+\textit{List} adalah \textit{array} yang paling banyak digunakan. Kita dapat menyimpan sejumlah nilai, dari tipe apapun ke dalam \texttt{list}, bahkan menambah atau mengurangi isinya. Untuk yang pernah mempelajari bahasa pemrograman C, tentu paham betapa sulitnya melakukan hal tersebut di C. Untuk C++ \texttt{list} dapat terapkan lebih mudah dengan bantuan \textit{standard template library}\footnote{\url{https://en.wikipedia.org/wiki/Standard\_Template\_Library}}
+
+Sebuah variabel \texttt{list}, misalnya \texttt{a}, diinisiasi dengan perintah \texttt{a=[]}. Maka, variabel \texttt{a} memiliki sejumlah fungsi yang bisa dilihat dengan perintah \texttt{dir(a)}. Diktat ini hanya akan membahas fungsi-fungsi yang sering digunakan saja. Fungsi lain bisa dipelajari sendiri dengan bantuan perintah \texttt{help(a.nama\_fungsi)}, dengan \texttt{a} adalah obyek \texttt{list}.
+
+\begin{enumerate}
+  \item \texttt{append}. Fungsi ini menambahkan elemen baru ke variabel \texttt{list}. Perhatikan \figurename~\ref{fig:append}. Variabel \texttt{a} yang awalnya kosong, kemudian diisi satu per satu menggunakan perintah \texttt{append}. Variabel \texttt{a} terakhir memiliki dua elemen, masing-masing bertipe \texttt{integer} dan \texttt{character}.
+  \begin{figure}
+    \begin{center}
+      \includegraphics[scale=1.25]{pics/append.png}
+      \caption{Proses penambahan elemen \texttt{list}}
+      \label{fig:append}
+    \end{center}
+  \end{figure}
+  
+  \item \texttt{extend}. Fungsi ini memiliki tugas yang sama dengan \texttt{append} dengan sedikit perbedaan. Perhatikan \figurename~\ref{fig:extend}. Di \figurename~\ref{fig:extend1}, variabel \texttt{a} ditambahkan sebuah elemen berupa variabel list \texttt{b} menggunakan fungsi \texttt{append}. Variabel \texttt{b} yang telah memiliki dua elemen ditambahkan ke variabel \texttt{a} sebagai satu elemen. Hal tersebut terlihat dari dijalankannya perintah \texttt{len(a)}.
+  
+Sementara di \figurename~\ref{fig:extend2}, proses yang sama dilakukan menggunakan fungsi \texttt{extend}. Fungsi \texttt{extend} akan menambahkan variabel \texttt{b} ke dalam variabel \texttt{a} tidak sebagai \texttt{list} secara keseluruhan, tetapi menambahkan masing-masing elemen variabel \texttt{b} ke dalam \texttt{a}. Itu sebabnya, hasil penambahan \texttt{b} ke dalam \texttt{a} membuat \texttt{a} saat ini memiliki dua elemen.
+  
+\begin{figure}[h!]
+\begin{center}
+\subfigure[]{\label{fig:extend1}}\includegraphics[scale=1.25]{pics/extend1.png}
+\subfigure[]{\label{fig:extend2}}\includegraphics[scale=1.25]{pics/extend2.png}
+\caption{Perbandingan penambahan elemen \texttt{list} menggunakan fungsi (a). \texttt{append} dan (b). \texttt{extend}}
+\label{fig:extend}
+\end{center}
+\end{figure}
+Di \lstlistingname~\ref{lst:pynonxmlreader}, ditunjukkan variabel \texttt{list} yang salah satunya digunakan sebagai kriteria \textit{looping}, tepatnya dilakukan oleh variabel \texttt{hilang} yang dideklarasikan di baris ke-9.
+
+\item \texttt{insert}. Selain menambahkan elemen ke variabel \texttt{list} di posisi akhir, penambahan elemen juga dapat dilakukan di posisi tertentu. Perhatikan \figurename~\ref{fig:insert}. Penambahan karakter \texttt{'x'} pada posisi pertama dari \texttt{list} dilakukan dengan perintah \texttt{a.insert(0,'x')}. Hal ini disebabkan karena indeks dari elemen \texttt{list} dimulai dari \texttt{0}. 
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=1.25]{pics/insert.png}
+    \caption{Penambahan karakter 'x' ke variabel \texttt{a} di posisi pertama}
+    \label{fig:insert}
+  \end{center}
+\end{figure}
+
+\item \texttt{remove}. Selain menambahkan elemen ke variabel \texttt{list}, kita dapat juga membuang salah satu elemen yang ada di posisi tertentu di dalam \texttt{list}. Perhatikan figurename~\ref{fig:remove}. Perintah \texttt{remove} digunakan untuk mengeluarkan elemen tertentu dari \texttt{list}. Jika ada lebih dari satu elemen yang sama yang akan dikeluarkan, maka elemen terpilih untuk dikeluarkan adalah elemen yang muncul pertama kali pada \texttt{list}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=1.25]{pics/remove.png}
+    \caption{Mengeluarkan elemen tertentu dari \texttt{list}}
+    \label{fig:remove}
+  \end{center}
+\end{figure}
+
+\item \texttt{pop}. Fungsi ini akan mengeluarkan elemen terakhir dari \texttt{list}. Perhatikan \figurename~\ref{fig:pop}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=1.25]{pics/pop.png}
+    \caption{Mengeluarkan elemen terakhir dari variabel \texttt{list}}
+    \label{fig:pop}
+  \end{center}
+\end{figure}
+
+\end{enumerate}
+\subsection{\texttt{Tuple}}
+\texttt{Tuple} adalah jenis \textit{array} selain \texttt{list} yang di Python dideklarasikan dengan perintah \texttt{a=()}. Operasi pada \texttt{tuple} lebih cepat dilakukan jika dibandingkan dengan \texttt{list}. Hal ini disebabkan karena \texttt{tuple} bersifat statis karena elemen yang ada di dalamnya tidak dapat diubah, kecuali yang bersifat \textit{mutable}. Karena bersifat statis, deklarasi variabel \texttt{a=()} tidak akan bermanfaat. Perhatikan \figurename~\ref{fig:tuple}.
+
+Di \figurename~\ref{fig:tuple}, sebuah variabel \texttt{a} memiliki empat elemen, di mana elemen ke-4 merupakan sebuah \texttt{list}. Elemen ke-4 diakses dengan indeks \texttt{3} (karena indeks \texttt{tuple} dimulai dari \texttt{0}). Ketika diakes, isi dari elemen ke-4 tersebut dapat diubah karena bersifat \textit{mutable}. Sebaliknya, ketika elemen lain (dalam hal ini elemen ke-2) akan diubah nilainya, Python menolaknya. 
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics{pics/tuple.png}
+    \caption{Beberapa operasi yang dilakukan pada variabel \texttt{tuple}}
+    \label{fig:tuple}
+  \end{center}
+\end{figure}
+
+Untuk \lstlistingname~\ref{lst:pynonxmlreader}, variabel \texttt{hilang} yang dideklarasikan di baris ke-9 sebagai variabel \texttt{list}, dapat juga dideklarasikan sebagai \texttt{tuple}. Hal ini disebabkan karena sepanjang \lstlistingname~\ref{lst:pynonxmlreader} dijalankan, elemen yang tersimpan di dalam variabel \texttt{hilang} tidak berubah. 
+ 
+\subsection{\texttt{Dictionary}}
+\texttt{Dictionary} merupakan \textit{array} yang elemen penyusunnya merupakan pasangan \textit{key-value}. Setiap elemen akan diindeks berdasarkan \textit{key}. \texttt{Dictionary} dideklarasikan menggunakan perintah \texttt{a=\{\}}. Untuk menambah elemen ke variabel \texttt{dictionary}, gunakan perintah seperti \figurename~\ref{fig:dict}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=1.25]{pics/dictionary.png}
+    \caption{Menambahkan elemen ke variabel \texttt{dictionary}}
+    \label{fig:dict}
+  \end{center}
+\end{figure}
+
+Kita juga dapat mengeluarkan sebuah elemen dari variabel \texttt{dictionary}. Karena elemennya merupakan pasangan \textit{key-value}, maka ketika dikeluarkan, pasangan \textit{key-value} tersebut tidak ada lagi di variabel \texttt{dictionary}. Perhatikan \figurename~\ref{fig:popDict}, elemen yang memiliki \textit{key} berupa karakter \texttt{'nama'} akan dikeluarkan menggunakan fungsi \texttt{pop}. Karena memerlukan argumen berupa \textit{key}, maka fungsi \texttt{pop} dapat mengeluarkan elemen yang posisinya di mana saja di dalam variabel \texttt{dictionary}, tidak harus di posisi terakhir.  
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[scale=1.25]{pics/popDict.png}
+    \caption{Mengeluarkan pasangan \textit{key-value} dari variabel \texttt{dictionary}}
+    \label{fig:popDict}
+  \end{center}
+\end{figure}
+
 \section{Operasi Berkas}
 
 Yang dimaksud sebagai operasi berkas di sub bab ini ditujukan untuk memberikan solusi otomatis melakukan operasi pengolahan citra pada sejumlah besar citra (khususny), atau berkas digital secara umum. Sebagai ilustrasi, dataset citra terkait tumbuhan salah satunya dapat diperoleh di PlantCLEF2017 \footnote{\url{http://otmedia.lirmm.fr/LifeCLEF/PlantCLEF2017/TrainPackages/PlantCLEF2017Train1EOL.tar.gz}}.

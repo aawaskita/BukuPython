@@ -79,6 +79,7 @@ Pustaka \textit{scikit-image} menyediakan fungsi pengurangan \textit{noise} seca
 \end{figure}
 
 \section{\textit{Frequency domain denoizing}}
+\label{sec:freqDenoizing}
 Setiap fungsi yang berulang secara periodik dapat dinyatakan sebagai jumlah dari beberapa fungsi pada frekuensi dan amplitudo tertentu \cite{Gonzalez}. Ilustrasinya disajikan pada \figurename~\ref{fig:periodik}. Sebuah citra digital dapat dianggap sebagai fungsi periodik yang karenanya dapat ditransformasi ke dalam domain frekuensi. Pada posisi di mana terjadi perubahan nilai intensitas piksel secara signifikan, citra dikatakan menyimpan komponen frekuensi tinggi. Sebaliknya, pada posisi di mana perubahan intensitas piksel sangat landai bahkan nyaris tetap, citra dikatakan menyimpan komponen frekuensi rendah.
 
 \begin{figure}
